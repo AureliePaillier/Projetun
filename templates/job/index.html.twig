@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres !{% endblock %}
+
+{% block body %}
+    <h1 class="my-4"> Liste des offres</h1>
+
+    {% for category, ListJobs in categories %}
+        <h2>{{ category }}</h2>
+
+        {% for job in ListJobs %}
+            <div class="row">
+                <div class="col-5">
+                    <a href="#">
+                        <img class="img-fluid rounded" width="300px" src="{{ asset('images/'~job.logo)}}" alt="{{ job.company }}">
+                    </a>
+                </div>
+                <div class="col-7">
+                    <h3>{{ job.position }}</h3>
+                    <p>{{ job.description }}</p>
+                    <p> Posté à {{ job.createdAt | date("m/d/Y") }}</p>
+                    <a href="{{ path('job_show', {'id':job.id, 'company': job.companySlug, 'position': job.positionSlug}) }}" class="btn btn-outline-primary"> En savoir plus </a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

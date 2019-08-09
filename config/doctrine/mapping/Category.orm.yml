@@ -1,0 +1,30 @@
+#config/doctrine/mapping/Category.orm.yml
+
+App\Entity\Category:
+  type: entity
+  repositoryClass: App\Repository\CategoryRepository
+
+  #clé primaire
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  #Colonnes de la tables
+  fields:
+    name:
+      type: string
+      length: 63
+
+  #relation de type un vers plusieurs
+  oneToMany:
+    jobs:
+      targetEntity: Job
+      mappedBy: category
+
+  #relation de type plusieurs vers plusieurs
+  manyToMany:
+    affiliates:
+      targetEntity: Affiliate
+      inversedBy: categories
